@@ -154,7 +154,7 @@ public abstract class AbstractApriori<V> {
 						+ entry.getKey());
 				// for each itemset this size
 				for (ItemSet<V> itemSet : entry.getValue()) {
-					System.out.println("handling itemset: " + itemSet);
+					System.out.println("handling itemset: " + itemSet + " with support: " + getAndCacheSupportForItemset(itemSet));
 					// for each of its items we generate a antecendent ->
 					// consequent combination
 					for (V is : itemSet.getItems()) {
