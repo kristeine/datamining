@@ -9,5 +9,5 @@
 *.DS_Store
 
 .idea/
-apriori/src/runnables/
+apriori/src/runnables/AprioriItemSetGeneratorAndRuleGeneration.java
 *.iml
