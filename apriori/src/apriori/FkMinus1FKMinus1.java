@@ -18,13 +18,15 @@ public class FkMinus1FKMinus1<V> extends BaseApriori<V> {
         // combinations
 
         for (int i = 0; i < frequentCandidatesKMinus1.size(); i++) {
-            ItemSet<V> itemSet1 = frequentCandidatesKMinus1.get(i);
+            ItemSet<V> itemSet1 = frequentCandidatesKMinus1.get(i); //Fkminus1
+
             inner : for (int j = 0; j < frequentCandidatesKMinus1.size(); j++) {
-                ItemSet<V> itemSet2 = frequentCandidatesKMinus1.get(j);
+                ItemSet<V> itemSet2 = frequentCandidatesKMinus1.get(j); //Fkminus1
+
                 Iterator<V> iterator1 = itemSet1.getItems().iterator();
                 Iterator<V> iterator2 = itemSet1.getItems().iterator();
 
-                while (iterator1.hasNext() && iterator2.hasNext()){
+                while (iterator1.hasNext()){
                     if (iterator1.next()!= iterator2.next() && !iterator1.hasNext()) {
                         break inner;
                     }
@@ -37,7 +39,6 @@ public class FkMinus1FKMinus1<V> extends BaseApriori<V> {
                 frequentCandidateSet.add(union);
             }
         }
-
 
         System.out.println(allGeneratedCandidatesCounter
                 + " total, unique itemsets: " + frequentCandidateSet.size());

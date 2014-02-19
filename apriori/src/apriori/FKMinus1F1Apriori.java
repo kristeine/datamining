@@ -18,10 +18,10 @@ public class FKMinus1F1Apriori<V> extends BaseApriori<V> {
         // combinations
 
         for (int i = 0; i < super.frequent1Itemsets.size(); i++) {
-            ItemSet<V> itemSet1 = super.frequent1Itemsets.get(i);
+            ItemSet<V> itemSet1 = super.frequent1Itemsets.get(i);  //F1
 
             for (int j = 0; j < frequentCandidatesKMinus1.size(); j++) {
-                ItemSet<V> itemSet2 = frequentCandidatesKMinus1.get(j);
+                ItemSet<V> itemSet2 = frequentCandidatesKMinus1.get(j); //Fkminus1
                 ItemSet<V> union = itemSet1.union(itemSet2);
                 if(union.size()>itemSet2.size()){
                     allGeneratedCandidatesCounter++;
