@@ -1,10 +1,6 @@
 package apriori;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FkMinus1FKMinus1<V> extends BaseApriori<V> {
 
@@ -13,16 +9,39 @@ public class FkMinus1FKMinus1<V> extends BaseApriori<V> {
 	}
 
 	@Override
-	public List<ItemSet<V>> aprioriGen(
-			List<ItemSet<V>> frequentCandidatesKMinus1) {
+    public List<ItemSet<V>> aprioriGen(List<ItemSet<V>> frequentCandidatesKMinus1) {
 
-		Collections.sort(frequentCandidatesKMinus1);
-		int allGeneratedCandidatesCounter = 0;
-		Set<ItemSet<V>> frequentCandidateSet = new HashSet<ItemSet<V>>();
+        Collections.sort(frequentCandidatesKMinus1);
+        int allGeneratedCandidatesCounter = 0;
+        Set<ItemSet<V>> frequentCandidateSet = new HashSet<ItemSet<V>>();
+        // we iterate both itemsets and generate new candidates base on their
+        // combinations
 
-		// TODO
+        for (int i = 0; i < frequentCandidatesKMinus1.size(); i++) {
+            ItemSet<V> itemSet1 = frequentCandidatesKMinus1.get(i);
+            inner : for (int j = 0; j < frequentCandidatesKMinus1.size(); j++) {
+                ItemSet<V> itemSet2 = frequentCandidatesKMinus1.get(j);
+                Iterator<V> iterator1 = itemSet1.getItems().iterator();
+                Iterator<V> iterator2 = itemSet1.getItems().iterator();
 
-		return new LinkedList<ItemSet<V>>(frequentCandidateSet);
-	}
+                while (iterator1.hasNext() && iterator2.hasNext()){
+                    if (iterator1.next()!= iterator2.next() && !iterator1.hasNext()) {
+                        break inner;
+                    }
+                }
+                ItemSet<V> union = itemSet1.union(itemSet2);
+                if(union.size() <= itemSet1.size()) {break;}
+
+                allGeneratedCandidatesCounter++;
+                getAndCacheSupportForItemset(union);
+                frequentCandidateSet.add(union);
+            }
+        }
+
+
+        System.out.println(allGeneratedCandidatesCounter
+                + " total, unique itemsets: " + frequentCandidateSet.size());
+        return new LinkedList<ItemSet<V>>(frequentCandidateSet);
+    }
 
 }

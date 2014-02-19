@@ -17,13 +17,8 @@ public class FKMinus1F1Apriori<V> extends BaseApriori<V> {
         // we iterate both itemsets and generate new candidates base on their
         // combinations
 
-        System.out.println("_____________________________________________");
-        System.out.println(frequentCandidatesKMinus1);
-        System.out.println(super.frequent1Itemsets);
-
         for (int i = 0; i < super.frequent1Itemsets.size(); i++) {
             ItemSet<V> itemSet1 = super.frequent1Itemsets.get(i);
-
 
             for (int j = 0; j < frequentCandidatesKMinus1.size(); j++) {
                 ItemSet<V> itemSet2 = frequentCandidatesKMinus1.get(j);
@@ -35,7 +30,6 @@ public class FKMinus1F1Apriori<V> extends BaseApriori<V> {
                 }
             }
         }
-
 
         System.out.println(allGeneratedCandidatesCounter
                 + " total, unique itemsets: " + frequentCandidateSet.size());

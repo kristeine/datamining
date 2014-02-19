@@ -71,12 +71,10 @@ public class BaseApriori<V> extends AbstractApriori<V> {
 
 		// store in our list of frequent itemsets
 		frequentItemSets.put(1, frequentCandidatesLevel);
-        Scanner s = new Scanner(System.in);
 
 
 		// create the higher levels as long as we still produce frequent
 		// itemsets
-        s.nextLine();
 		for (int i = 2;; i++) {
 			// generate candidates for level i
 			System.out.println("Level " + i);
@@ -101,7 +99,6 @@ public class BaseApriori<V> extends AbstractApriori<V> {
 			// store in our list of frequent itemsets
 			frequentItemSets.put(i, frequentCandidatesLevel);
 			System.out.println("\t\t" + frequentCandidatesLevel);
-            s.nextLine();
 
         }
 
