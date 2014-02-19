@@ -40,7 +40,6 @@ public class BruteForceApriori<V> extends BaseApriori<V> {
 					+ " candidates.");
 			System.out.println("\t\t" + generateCandidateSizeK);
 
-			// prune
 			frequentCandidatesLevel = generateCandidateSizeK;
 
 			System.out.println("\tKept " + frequentCandidatesLevel.size()

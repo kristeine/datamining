@@ -139,6 +139,7 @@ public abstract class AbstractApriori<V> {
 			ItemSet<V> consequent) {
 
 		AssociationRule rule=new AssociationRule(frequentItemSet,consequent);
+        rules.add(rule);
 	}
 
 	/**

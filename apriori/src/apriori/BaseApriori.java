@@ -1,11 +1,6 @@
 package apriori;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class BaseApriori<V> extends AbstractApriori<V> {
 
@@ -76,9 +71,12 @@ public class BaseApriori<V> extends AbstractApriori<V> {
 
 		// store in our list of frequent itemsets
 		frequentItemSets.put(1, frequentCandidatesLevel);
+        Scanner s = new Scanner(System.in);
+
 
 		// create the higher levels as long as we still produce frequent
 		// itemsets
+        s.nextLine();
 		for (int i = 2;; i++) {
 			// generate candidates for level i
 			System.out.println("Level " + i);
@@ -103,7 +101,9 @@ public class BaseApriori<V> extends AbstractApriori<V> {
 			// store in our list of frequent itemsets
 			frequentItemSets.put(i, frequentCandidatesLevel);
 			System.out.println("\t\t" + frequentCandidatesLevel);
-		}
+            s.nextLine();
+
+        }
 
 	}
 
