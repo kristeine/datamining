@@ -74,9 +74,9 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 		boolean useSmallDataset=false; //use small or large dataset
 		try {
 			if(useSmallDataset)
-				transactions=readFile("smallDataset.txt");
+				transactions=readFile("/home/tib/git/datamining/apriori/smallDataset.txt");
 			else
-			transactions = readFile("supermarket.arff");
+			transactions = readFile("/home/tib/git/datamining/apriori/supermarket.arff");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
