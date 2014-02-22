@@ -1,13 +1,7 @@
 package apriori;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public abstract class AbstractApriori<V> {
 
@@ -135,10 +129,26 @@ public abstract class AbstractApriori<V> {
 	 * @param frequentItemSet
 	 * @param consequent
 	 */
-	public void generateRulesBase(ItemSet<V> frequentItemSet,
-			ItemSet<V> consequent) {
+	public void generateRulesBase(ItemSet<V> frequentItemSet, ItemSet<V> consequent) {
 
 		AssociationRule rule=new AssociationRule(frequentItemSet,consequent);
+
+        ItemSet<V> A = rule.getItemSetA();
+        ItemSet<V> B = rule.getItemSetB();
+
+        double occuranceA = 0;
+        double occuranceAandB = 0;
+        ;
+
+        for (List<ItemSet<V>> list: frequentItemSets.values()){
+            for (ItemSet<V> set: list){
+                if(set.union(A).size()==set.size()) occuranceA++;
+                if(set.union(A.union(B)).size()==set.size()) occuranceAandB++;
+            }
+        }
+
+
+        rule.setConfidence(occuranceAandB/occuranceA);
         rules.add(rule);
 	}
 
@@ -169,6 +179,7 @@ public abstract class AbstractApriori<V> {
 				}
 			}
 		}
+
 	}
 
 	public List<AssociationRule<V>> getRules() {
