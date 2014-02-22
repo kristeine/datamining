@@ -129,7 +129,7 @@ public abstract class AbstractApriori<V> {
 	 * @param frequentItemSet
 	 * @param consequent
 	 */
-	public void generateRulesBase(ItemSet<V> frequentItemSet, ItemSet<V> consequent) {
+	public void generateRulesBase(ItemSet<V> frequentItemSet, ItemSet<V> consequent, double minSup) {
 
 		AssociationRule rule=new AssociationRule(frequentItemSet,consequent);
 
@@ -150,13 +150,13 @@ public abstract class AbstractApriori<V> {
 
         rule.setConfidence(occuranceAandB/occuranceA);
         rule.setSupport(supportCache.get(A.union(B)));
-        rules.add(rule);
+        if(rule.getSupport()>=minSup) rules.add(rule);
 	}
 
 	/**
 	 * start generating rules by iterating al frequent 2+ itemsets
 	 */
-	public void generateAllRules() {
+	public void generateAllRules(double minSup) {
 		for (Entry<Integer, List<ItemSet<V>>> entry : frequentItemSets
 				.entrySet()) {
 			// we only do this for itemsets larger 1, it'd be kind of a boring
@@ -175,7 +175,7 @@ public abstract class AbstractApriori<V> {
 						// System.out.println("Starting recursion for: "
 						// + leftHandSide + " and " + rightHandSide);
 						// start recursion for this combination
-						generateRulesBase(leftHandSide, rightHandSide);
+						generateRulesBase(leftHandSide, rightHandSide, minSup);
 					}
 				}
 			}
