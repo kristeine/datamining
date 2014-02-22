@@ -1,7 +1,7 @@
 package runnables;
 
 import apriori.AbstractApriori;
-import apriori.FkMinus1FKMinus1;
+import apriori.FKMinus1F1Apriori;
 import apriori.ItemSet;
 
 import java.io.BufferedReader;
@@ -71,7 +71,7 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 
 		// get the data set
 		List<ItemSet<String>> transactions=null;
-		boolean useSmallDataset=false; //use small or large dataset
+		boolean useSmallDataset=true; //use small or large dataset
 		try {
 			if(useSmallDataset)
 				transactions=readFile("/home/tib/git/datamining/apriori/smallDataset.txt");
@@ -91,14 +91,15 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 		AbstractApriori<String> apriori;
 
 //		apriori = new BruteForceApriori<String>(transactions);
-//		apriori = new FKMinus1F1Apriori<String>(transactions);
-		apriori = new FkMinus1FKMinus1<String>(transactions);
+		apriori = new FKMinus1F1Apriori<String>(transactions);
+//		apriori = new FkMinus1FKMinus1<String>(transactions);
 
 		apriori.apriori(minSupport);
 
 		apriori.generateAllRules();
 		
 		System.out.println("Generated " + apriori.getRules().size() + " rules.");
+        System.out.println(apriori.getRules());
 
 	}
 

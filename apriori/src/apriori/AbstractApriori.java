@@ -149,6 +149,7 @@ public abstract class AbstractApriori<V> {
 
 
         rule.setConfidence(occuranceAandB/occuranceA);
+        rule.setSupport(supportCache.get(A.union(B)));
         rules.add(rule);
 	}
 
