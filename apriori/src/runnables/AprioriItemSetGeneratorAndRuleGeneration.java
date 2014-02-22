@@ -1,6 +1,7 @@
 package runnables;
 
 import apriori.AbstractApriori;
+import apriori.AssociationRule;
 import apriori.FKMinus1F1Apriori;
 import apriori.ItemSet;
 
@@ -74,9 +75,9 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 		boolean useSmallDataset=true; //use small or large dataset
 		try {
 			if(useSmallDataset)
-				transactions=readFile("/home/tib/git/datamining/apriori/smallDataset.txt");
+				transactions=readFile("smallDataset.txt");
 			else
-			transactions = readFile("/home/tib/git/datamining/apriori/supermarket.arff");
+			transactions = readFile("supermarket.arff");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -99,8 +100,9 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 		apriori.generateAllRules();
 		
 		System.out.println("Generated " + apriori.getRules().size() + " rules.");
-        System.out.println(apriori.getRules());
-
+        for(AssociationRule ar: apriori.getRules()){
+            System.out.println(ar);
+        }
 	}
 
 }
