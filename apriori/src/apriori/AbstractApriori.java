@@ -136,19 +136,7 @@ public abstract class AbstractApriori<V> {
         ItemSet<V> A = rule.getItemSetA();
         ItemSet<V> B = rule.getItemSetB();
 
-        double occuranceA = 0;
-        double occuranceAandB = 0;
-        ;
-
-        for (List<ItemSet<V>> list: frequentItemSets.values()){
-            for (ItemSet<V> set: list){
-                if(set.union(A).size()==set.size()) occuranceA++;
-                if(set.union(A.union(B)).size()==set.size()) occuranceAandB++;
-            }
-        }
-
-
-        rule.setConfidence(occuranceAandB/occuranceA);
+        rule.setConfidence(supportCache.get(A.union(B))/ supportCache.get(A));
         rule.setSupport(supportCache.get(A.union(B)));
         if(rule.getSupport()>=minSup) rules.add(rule);
 	}
