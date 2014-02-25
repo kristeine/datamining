@@ -17,21 +17,24 @@ public class FkMinus1FKMinus1<V> extends BaseApriori<V> {
         // we iterate both itemsets and generate new candidates base on their
         // combinations
 
+
         for (ItemSet<V> itemSet1 : frequentCandidatesKMinus1) {
 
             inner : for (ItemSet<V> itemSet2: frequentCandidatesKMinus1) {
 
-                Iterator<V> iterator1 = itemSet1.getItems().iterator();
-                Iterator<V> iterator2 = itemSet1.getItems().iterator();
 
-                while (iterator1.hasNext()){
-                    if (iterator1.next()!= iterator2.next() && !iterator1.hasNext()) {
-                        break inner;
+                Iterator<V> iterator1 = itemSet1.getItems().iterator();
+                Iterator<V> iterator2 = itemSet2.getItems().iterator();
+
+                while (iterator1.hasNext()&& iterator2.hasNext()){
+                    if (iterator1.next()!= iterator2.next() && iterator1.hasNext()) {
+                        continue inner;
                     }
                 }
                 ItemSet<V> union = itemSet1.union(itemSet2);
-                if(union.size() <= itemSet1.size()) {break;}
-
+                if(union.size() <= itemSet1.size()) {
+                    continue;
+                }
                 allGeneratedCandidatesCounter++;
                 getAndCacheSupportForItemset(union);
                 frequentCandidateSet.add(union);
