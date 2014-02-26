@@ -2,7 +2,7 @@ package runnables;
 
 import apriori.AbstractApriori;
 import apriori.AssociationRule;
-import apriori.BruteForceApriori;
+import apriori.FkMinus1FKMinus1;
 import apriori.ItemSet;
 
 import java.io.BufferedReader;
@@ -72,7 +72,7 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 
 		// get the data set
 		List<ItemSet<String>> transactions=null;
-		boolean useSmallDataset=true; //use small or large dataset
+		boolean useSmallDataset=false; //use small or large dataset
 		try {
 			if(useSmallDataset)
 				transactions=readFile("smallDataset.txt");
@@ -91,9 +91,9 @@ public class AprioriItemSetGeneratorAndRuleGeneration {
 
 		AbstractApriori<String> apriori;
 
-		apriori = new BruteForceApriori<String>(transactions);
+//		apriori = new BruteForceApriori<String>(transactions);
 //		apriori = new FKMinus1F1Apriori<String>(transactions);
-//		apriori = new FkMinus1FKMinus1<String>(transactions);
+		apriori = new FkMinus1FKMinus1<String>(transactions);
 
 		apriori.apriori(minSupport);
 
